@@ -2,7 +2,7 @@ import React from 'react';
 import { AppRegistry, Alert, StyleSheet, Text, View } from 'react-native';
 import { Container, Footer, Body, Input, Right, Button, Badge, Content } from 'native-base';
 import { StackNavigator } from 'react-navigation';
-// import Keyboard from './Keyboard';
+import NavigationBar from 'react-native-navbar';
 
 class IndexPage extends React.Component {
 
@@ -33,7 +33,8 @@ class ChatRoom extends React.Component {
     super(props);
     this.state = {
       textChat: "",
-      chat1: []
+      chat1: [],
+      textFocus: false
     };
   }
 
@@ -41,7 +42,7 @@ class ChatRoom extends React.Component {
     var array = []
     for (let i = 0; i < this.state.chat1.length; i++) {
       array.push((
-        <Badge primary style={{ marginLeft: 15, marginTop: 15, marginBottom: 5, textAlign: Right }}>
+        <Badge primary style={{ marginLeft: 15, marginTop: 1, marginBottom: 5, backgroundColor: "red" }}>
           <Text style={{ color: "white", marginLeft: 5, marginRight: 5 }}>{this.state.chat1[i]}</Text>
         </Badge>
       ))
@@ -62,10 +63,15 @@ class ChatRoom extends React.Component {
   render() {
     return (
       <Container>
-        <Content>
+        {/* <NavigationBar
+          title={titleConfig}
+          rightButton={rightButtonConfig}
+        /> */}
+        {/* <Button><Text>Setting</Text></Button> */}
+        <Content ref={c => (this.component = c)} style={{ marginTop: 15 }}>
           {this.generated()}
-        </Content>
-        <Footer style={{ marginTop: 520 }}>
+        </Content >
+        <Footer style={{ marginTop: 15, marginBottom: 215 }}>
           <Body>
             <Input placeholder='Text Input' style={{ marginLeft: 10 }} onChangeText={(massage) => { this.setState({ textChat: massage }) }} value={this.state.textChat} />
           </Body>
@@ -94,3 +100,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+// const styles = {
+//   container: {
+//     flex: 1,
+//   },
+// };
+
+const rightButtonConfig = {
+  title: 'Next',
+  handler: () => alert('hello!'),
+};
+
+const titleConfig = {
+  title: 'Hello, world',
+};

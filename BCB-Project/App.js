@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppRegistry, Alert, StyleSheet, Text, View } from 'react-native';
-import { Container, Footer, Body, Input, Right, Button, Badge, Content } from 'native-base';
-import { StackNavigator } from 'react-navigation';
+import { AppRegistry, Alert, StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
+import { Container, Footer, Body, Input, Right, Button, Badge, Content, Item } from 'native-base';
+import { StackNavigator, Header } from 'react-navigation';
 import NavigationBar from 'react-native-navbar';
 
 class IndexPage extends React.Component {
@@ -34,7 +34,7 @@ class ChatRoom extends React.Component {
     this.state = {
       textChat: "",
       chat1: [],
-      textFocus: false
+      textFocus: false,
     };
   }
 
@@ -62,26 +62,49 @@ class ChatRoom extends React.Component {
 
   render() {
     return (
-      <Container>
+
+
+      <Container >
+
+
         {/* <NavigationBar
           title={titleConfig}
           rightButton={rightButtonConfig}
         /> */}
+
         {/* <Button><Text>Setting</Text></Button> */}
-        <Content ref={c => (this.component = c)} style={{ marginTop: 15 }}>
-          {this.generated()}
-        </Content >
-        <Footer style={{ marginTop: 15, marginBottom: 215 }}>
-          <Body>
-            <Input placeholder='Text Input' style={{ marginLeft: 10 }} onChangeText={(massage) => { this.setState({ textChat: massage }) }} value={this.state.textChat} />
-          </Body>
-          <Right style={{ marginRight: 5 }}>
-            <Button success style={{ marginTop: 15, marginBottom: 15 }} onPress={() => this.handleText()}>
-              <Text style={{ marginLeft: 10, marginRight: 10, color: "white" }} >Send</Text>
-            </Button>
-          </Right>
-        </Footer>
+
+        <KeyboardAvoidingView
+          keyboardVerticalOffset={Header.HEIGHT}
+          style={{ flex: 1 }}
+          behavior="padding"
+        >
+
+          <Content ref={c => (this.component = c)} style={{ marginTop: 15, flex: 1 }}>
+            {this.generated()}
+            <Item style={{ position: 'absolute', left: 0, right: 0, bottom: 0 }}>
+              <Input placeholder="Underline Textbox" />
+            </Item>
+          </Content >
+          <Footer style={{ justifySelf: 'flex-end' }}  >
+            <Body>
+              <Input placeholder='Text Input' style={{ marginLeft: 10 }} onChangeText={(massage) => { this.setState({ textChat: massage }) }} value={this.state.textChat} />
+            </Body>
+            <Right style={{ marginRight: 5 }}>
+              <Button success style={{ marginTop: 15, marginBottom: 15 }} onPress={() => this.handleText()}>
+                <Text style={{ marginLeft: 10, marginRight: 10, color: "white" }} >Send</Text>
+              </Button>
+            </Right>
+          </Footer>
+
+
+
+        </KeyboardAvoidingView>
+
+
       </Container >
+
+
     );
   }
 }
@@ -107,11 +130,11 @@ const styles = StyleSheet.create({
 //   },
 // };
 
-const rightButtonConfig = {
-  title: 'Next',
-  handler: () => alert('hello!'),
-};
+// const rightButtonConfig = {
+//   title: 'Next',
+//   handler: () => alert('hello!'),
+// };
 
-const titleConfig = {
-  title: 'Hello, world',
-};
+// const titleConfig = {
+//   title: 'Hello, world',
+// };
